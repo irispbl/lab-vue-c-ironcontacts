@@ -2,7 +2,7 @@
 <template>
   <h1>IronContacts</h1>
   <button type="button" @click="addNewContact()"> Add Random Contact</button>
-  <button type="button">Sort by popularity</button>
+  <button type="button" @click="sortPopularity()">Sort by popularity</button>
   <button type="button" @click="sortContacts()">Sort by name</button>
   <table>
     <thead>
@@ -44,13 +44,15 @@ export default {
    },
    sortContacts(){
     this.contactList.sort(function (a,b){
-      if (b > a){
-        return -1;
-      } if (a > b){
-        return 1;
-      }
-      return 0;
-    })
+      if (b.name > a.name) return -1;
+      if (a.name > b.name) return 1;
+  
+    });
+   },
+   sortPopularity(){
+    this.contactList.sort(function(a,b){
+      return b.popularity - a.popularity
+    });
    }
   },
 };
